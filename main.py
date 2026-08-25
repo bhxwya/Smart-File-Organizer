@@ -31,7 +31,7 @@ def main():
 
     for file in preview_files:
         print(file)
-        print()
+    print()
 
     while True:
         choice = input("Do you want to organize these files? (y/n): ").lower()
