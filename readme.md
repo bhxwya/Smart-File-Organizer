@@ -40,6 +40,7 @@ Smart-File-Organizer/
 ├── main.py
 ├── .gitignore
 └── README.md
+```
 
 ## Run
 
@@ -47,11 +48,13 @@ Make sure Python is installed, then run:
 
 ```bash
 python -m main
+```
 
 Enter the path of the folder you want to organize.
 
 The program will first preview the files and their target categories:
 
+```text
 Files available to organize:
 
 resume.pdf → Documents
@@ -59,6 +62,7 @@ photo.jpg → Images
 song.mp3 → Audio
 
 Do you want to organize these files? (y/n):
+```
 
 Enter y to organize the files or n to cancel.
 
@@ -66,10 +70,11 @@ Enter y to organize the files or n to cancel.
 
 If a file with the same name already exists in the destination folder, the organizer automatically renames the new file:
 
+```text
 sample.py
 sample_1.py
 sample_2.py
-
+```
 This prevents existing files from being overwritten.
 
 ## Logging
@@ -78,7 +83,9 @@ logs/log.log
 
 Example:
 
+```text
 2026-08-25 13:32:03,506 - organizer.organizer - INFO - Moved resume.pdf → Documents
+```
 
 ## Version
 
