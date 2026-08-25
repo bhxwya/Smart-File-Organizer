@@ -8,10 +8,9 @@ logger = logging.getLogger(__name__)
 class FileOrganizer:
     def __init__(self, folder_path):
         self.folder_path = Path(folder_path)
-        
+
         if not self.folder_path.exists() or not self.folder_path.is_dir():
             raise ValueError("Invalid folder path.")
-          
 
     def get_category(self, item):
         for category, extensions in CATEGORIES.items():
@@ -19,12 +18,19 @@ class FileOrganizer:
                 return category
         return "Others"
 
-    def organize(self):
+    def organize(self, preview=False):
         count = 0
+        preview_files = []
 
         for item in self.folder_path.iterdir():
             if item.is_file():
                 category = self.get_category(item)
+
+                if preview:
+                    preview_files.append(f"{item.name} → {category}")
+                    count += 1
+                    continue
+
                 destination = self.folder_path / category
                 destination.mkdir(exist_ok=True)
 
@@ -43,10 +49,13 @@ class FileOrganizer:
                         number += 1
 
                     item.rename(put_files)
-                    logger.info(f"Duplicate detected: {item.name} → renamed to {changed_name} to prevent overwrite.")
+                    logger.info(
+                        f"Duplicate detected: {item.name} → renamed to {changed_name} to prevent overwrite.")
 
                 count += 1
                 logger.info(f"Moved {put_files.name} → {category}")
-
-        print("Files organized successfully!")
-        print(f"{count} files organized.")
+                
+        if preview:
+            return preview_files
+        
+        return count
