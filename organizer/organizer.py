@@ -1,5 +1,8 @@
 from pathlib import Path
-from categories import CATEGORIES
+from organizer.categories import CATEGORIES
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class FileOrganizer:
@@ -40,8 +43,10 @@ class FileOrganizer:
                         number += 1
 
                     item.rename(put_files)
+                    logger.info(f"Duplicate detected: {item.name} → renamed to {changed_name} to prevent overwrite.")
 
                 count += 1
+                logger.info(f"Moved {put_files.name} → {category}")
 
         print("Files organized successfully!")
         print(f"{count} files organized.")

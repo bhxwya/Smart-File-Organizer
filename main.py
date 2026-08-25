@@ -1,4 +1,8 @@
-from organizer import FileOrganizer
+import organizer.logger
+from organizer.organizer import FileOrganizer
+
+import logging
+logger = logging.getLogger(__name__)
 
 
 def main():
@@ -8,6 +12,7 @@ def main():
         organizer = FileOrganizer(folder_path)
     except ValueError as e:
         print(f"Error: {e}")
+        logger.error(f"ERROR - Invalid folder path provided: {folder_path}")
         return
     
     print(f"Folder selected: {organizer.folder_path}")
